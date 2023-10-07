@@ -1038,14 +1038,20 @@ function setMessage(collect, collect1, collect2, collect3, collect4, collect5){
 }
 function setTable(collect, collect1, collect2, collect3, collect4, collect5){
     let clt
+    let countTotal = 0;
+    let countSTD = 0;
+    let countEXP = 0;
 
     let items = document.querySelector('.itensEditTable')
-    let total = document.querySelector('.title2 .exp')
-    total.innerHTML = "oi"
-    
+    let total = document.querySelector('.title2 .total')
+    let std = document.querySelector('.title2 .std')
+    let exp = document.querySelector('.title2 .exp')
 
+    total.innerHTML = ""
+    std.innerHTML = ""
+    exp.innerHTML = ""
     items.innerHTML = ''
-    //total.innerHTML = ''
+
     if(collect != undefined){
         clt = collect
     }else if(collect1 != undefined){
@@ -1066,8 +1072,14 @@ function setTable(collect, collect1, collect2, collect3, collect4, collect5){
         let valorEXP = clt[0].ForEXP[chave];
         let valorSTD = clt[0].ForSTD[chave];
         elementos.push({ Rota: chave, valor: valor, valorEXP: valorEXP, valorSTD: valorSTD });
+        countTotal += valor;
+        if(valorSTD != undefined){
+            countSTD += valorSTD
+        }
+        if(valorEXP != undefined){
+            countEXP += valorEXP
+        }
     }
-    console.log(elementos);
     elementos.sort(function(a, b) {
         return a.Rota.localeCompare(b.Rota); // Corrija para a.Rota e b.Rota
     });
@@ -1114,6 +1126,9 @@ function setTable(collect, collect1, collect2, collect3, collect4, collect5){
 
         items.appendChild(divItem);
     }
+    total.innerHTML = countTotal
+    std.innerHTML = countSTD
+    exp.innerHTML = countEXP
 }
 function Graphic(collect, collect1, collect2, collect3, collect4, collect5){
 
